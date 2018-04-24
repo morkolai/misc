@@ -3,21 +3,22 @@ using namespace std;
 #include <iostream>
 
 bool isPrime(int a);
+void primeNumbers(int k);
+void primeNumbersOpt(int k);
 
 int main() {
 
-	cout << "Prime numbers less than 100\n";
+	int input;
 
-	for (int i = 2; i < 100; i++) { //2 is the only even prime number, try to only count with odds to make it more efficient
-		
-		if (isPrime(i))
-			cout << i << endl;
-	}
+	cin >> input;
+	primeNumbers(input);
 
-	return 0;
+	cin >> input;
+	primeNumbersOpt(input);
+
 }
 
-bool isPrime(int a) {
+bool isPrime(int a) {					//Checks if a number is a prime number
 
 	for (int i = a-1; i > 1; i--) {
 
@@ -26,4 +27,25 @@ bool isPrime(int a) {
 	}
 
 	return true;
+}
+
+void primeNumbers(int k) {				//General function
+
+	for (int i = 2; i < k; i++) { 
+
+		if (isPrime(i))
+			cout << i << endl;
+	}
+}
+
+void primeNumbersOpt(int k) {			//Optimized function
+
+	if (k >= 2)
+		cout << "2\n";
+
+	for (int i = 3; i < k; i += 2) {
+
+		if (isPrime(i))
+			cout << i << endl;
+	}
 }
