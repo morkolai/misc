@@ -6,11 +6,11 @@ struct node {
 	node * next;
 };
 
-node * head = new node,
-*z = new node,
-*a = new node,
-*b = new node,
-*c = new node;
+node	* head = new node,
+			*z = new node,
+			*a = new node,
+			*b = new node,
+			*c = new node;
 
 void display();
 node * before(node * x);
@@ -31,13 +31,15 @@ int main() {
 	c->next = z;
 	z->next = z;
 
-	remove(b);
-	display();
+	
 	node * d = new node;
 	d->key = 'D';
 	place(d);
 	display();
-
+	remove(a);
+	remove(b);
+	remove(c);
+	display();
 	return 0;
 }
 
