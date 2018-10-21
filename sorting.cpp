@@ -2,7 +2,7 @@
 
 typedef int itemtype;
 
-itemtype arr[] = {0,4,5,2,7,3,6,8,2,4,1,3,9,9,9,5,2,4,5,4,7,2,6,2,8,5,6,2,6};
+itemtype arr[] = {0,4,5,2,7,3,6,8,2,4,1,3,9,9,9};
 
 const int LEN = sizeof(arr) / sizeof(*arr);
 
@@ -14,21 +14,21 @@ void insertionSort(itemtype a[], int N);
 void bubbleSort(itemtype a[], int N);
 void shellSort(itemtype a[], int N);
 void distributedCounting(itemtype a[], int N);
+int biggestValue(itemtype a[], int N);
 
 int main() {
 
-	distributedCounting(arr, LEN);
+	selectionSort(arr, LEN);
 	validateSort(arr, LEN);
 	print(arr, LEN);
-
 
 	return 0;
 }
 
 void print(itemtype a[], int N) {
 
-	for (int i = 0; i <= N; i++) {
-		std::cout << ' ' << a[i];
+	for (int i = 1; i <= N; i++) {
+		std::cout << '['<< i << "] = " << a[i] << std::endl;
 	}
 	std::cout << std::endl;
 }
@@ -108,25 +108,41 @@ void shellSort(itemtype a[], int N) {
 	}
 }
 
-/*void distributedCounting(itemtype a[], int N) {
+void distributedCounting(itemtype a[], int N) {
 
-	const int M = 9;
+	const int M = 10; //biggestValue(arr, LEN) + 1;
 
-	itemtype count[M], b[LEN];
+	itemtype count[M], b[LEN+1];
 
 	for (int j = 0; j < M; j++) {
 		count[j] = 0;
 	}
+
 	for (int i = 1; i <= N; i++) {
 		count[a[i]]++;
 	}
+
 	for (int j = 1; j < M; j++) {
 		count[j] += count[j - 1];
 	}
+
 	for (int i = N; i >= 1; i--) {
 		b[count[a[i]]--] = a[i];
 	}
+
 	for (int i = 1; i <= N; i++) {
 		a[i] = b[i];
+
 	}
-}*/
+}
+
+int biggestValue(itemtype a[], int N) {
+
+	int max = a[1];
+	for (int i = 1; i <= N; i++) {
+		if (a[i] > max) {
+			max = a[i];
+		}
+		return max;
+	}
+}
