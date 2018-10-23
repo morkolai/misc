@@ -1,10 +1,12 @@
+//implementation of the sorting algorithms from the book algorithms in c++ by robert sedgewick
+
 #include <iostream>
 
 typedef int itemtype;
 
 itemtype arr[] = {0,4,5,2,7,3,6,8,2,4,1,3,9,9,9};
 
-const int LEN = sizeof(arr) / sizeof(*arr);
+const int LEN = sizeof(arr) / sizeof(*arr) + 1;
 
 void print(itemtype a[], int N);
 void swap(itemtype a[], int i, int j);
@@ -14,11 +16,11 @@ void insertionSort(itemtype a[], int N);
 void bubbleSort(itemtype a[], int N);
 void shellSort(itemtype a[], int N);
 void distributedCounting(itemtype a[], int N);
+void quicksort(itemtype a[], int l, int r);
 int biggestValue(itemtype a[], int N);
 
 int main() {
 
-	selectionSort(arr, LEN);
 	validateSort(arr, LEN);
 	print(arr, LEN);
 
@@ -133,6 +135,28 @@ void distributedCounting(itemtype a[], int N) {
 	for (int i = 1; i <= N; i++) {
 		a[i] = b[i];
 
+	}
+}
+
+void quicksort(itemtype a[], int l, int r) {
+	
+	int i, j;
+	itemtype v;
+	if (r > l) {
+		v = a[r];
+		i = l - 1;
+		j = r;
+		for (;;) {
+			while (a[++i] < v);
+			while (a[--j] > v);
+			if (i >= j) {
+				break;
+			}
+			swap(a, i, j);
+		}
+		swap(a, i, r);
+		quicksort(a, l, i - 1);
+		quicksort(a, i + 1, r);
 	}
 }
 
